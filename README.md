@@ -3,7 +3,6 @@
 A modern, full-stack organization and tenant management platform built with React, TypeScript, and Supabase.
 
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://tenanttrack.pages.dev/)
-[![Built with Lovable](https://img.shields.io/badge/built%20with-Lovable-ff69b4)](https://lovable.dev)
 [![Deployed on Cloudflare](https://img.shields.io/badge/deployed%20on-Cloudflare%20Pages-orange)](https://pages.cloudflare.com/)
 
 ## 🚀 Live Demo
@@ -184,7 +183,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Built with [Lovable](https://lovable.dev) - AI-powered development platform
 - UI components from [shadcn/ui](https://ui.shadcn.com/)
 - Deployed on [Cloudflare Pages](https://pages.cloudflare.com/)
 - Backend powered by [Supabase](https://supabase.com/)
