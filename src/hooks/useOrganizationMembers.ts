@@ -11,20 +11,36 @@ export function useOrganizationMembers(organizationId: string | null) {
     queryFn: async () => {
       if (!organizationId) return [];
 
-      const { data, error } = await supabase
+      // First get members
+      const { data: membersData, error: membersError } = await supabase
         .from('organization_members')
-        .select(`
-          *,
-          profile:profiles!organization_members_user_id_fkey(email, display_name, avatar_url)
-        `)
+        .select('*')
         .eq('organization_id', organizationId)
         .order('created_at', { ascending: true });
 
-      if (error) throw error;
+      if (membersError) throw membersError;
+      if (!membersData?.length) return [];
 
-      return (data || []).map((member: any) => ({
+      // Get all user IDs
+      const userIds = membersData.map((m) => m.user_id);
+
+      // Fetch profiles separately
+      const { data: profilesData, error: profilesError } = await supabase
+        .from('profiles')
+        .select('user_id, email, display_name, avatar_url')
+        .in('user_id', userIds);
+
+      if (profilesError) throw profilesError;
+
+      // Create a map of user_id to profile
+      const profileMap = new Map(
+        (profilesData || []).map((p) => [p.user_id, p])
+      );
+
+      // Merge members with profiles
+      return membersData.map((member) => ({
         ...member,
-        profile: member.profile || { email: 'Unknown', display_name: null, avatar_url: null },
+        profile: profileMap.get(member.user_id) || { email: 'Unknown', display_name: null, avatar_url: null },
       })) as OrganizationMember[];
     },
     enabled: !!organizationId,

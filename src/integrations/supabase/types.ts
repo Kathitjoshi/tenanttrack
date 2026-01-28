@@ -205,6 +205,23 @@ export type Database = {
         }
         Returns: string
       }
+      get_organizations_with_counts: {
+        Args: never
+        Returns: {
+          created_at: string
+          id: string
+          logo_url: string
+          max_projects: number
+          max_users: number
+          member_count: number
+          name: string
+          plan: Database["public"]["Enums"]["subscription_plan"]
+          primary_color: string
+          slug: string
+          status: Database["public"]["Enums"]["organization_status"]
+          updated_at: string
+        }[]
+      }
       has_app_role: {
         Args: { check_role: Database["public"]["Enums"]["app_role"] }
         Returns: boolean
