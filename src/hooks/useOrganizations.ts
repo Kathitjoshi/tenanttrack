@@ -9,30 +9,12 @@ export function useOrganizations() {
   const { data: organizations = [], isLoading, error } = useQuery({
     queryKey: ['organizations'],
     queryFn: async () => {
-      // First get organizations
-      const { data: orgs, error: orgsError } = await supabase
-        .from('organizations')
-        .select('*')
-        .order('created_at', { ascending: false });
+      // Use optimized RPC function that fetches orgs with member counts in one query
+      const { data, error } = await supabase.rpc('get_organizations_with_counts');
 
-      if (orgsError) throw orgsError;
+      if (error) throw error;
 
-      // Then get member counts for each organization
-      const orgsWithCounts = await Promise.all(
-        (orgs || []).map(async (org) => {
-          const { count } = await supabase
-            .from('organization_members')
-            .select('*', { count: 'exact', head: true })
-            .eq('organization_id', org.id);
-
-          return {
-            ...org,
-            member_count: count || 0,
-          } as Organization;
-        })
-      );
-
-      return orgsWithCounts;
+      return (data || []) as Organization[];
     },
   });
 
