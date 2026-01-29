@@ -8,7 +8,7 @@ A modern, full-stack organization and tenant management platform built with Reac
 
 ## 🚀 Live Demo
 
-**[View Live Application →](https://7a66f74d.tenanttrack.pages.dev/)**
+**[View Live Application →](https://bbffb8fc.tenanttrack.pages.dev/)**
 
 ## ✨ Features
 
