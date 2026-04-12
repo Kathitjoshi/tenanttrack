@@ -6,6 +6,9 @@ A modern, full-stack organization and tenant management platform built with Reac
 [![Deployed on Cloudflare](https://img.shields.io/badge/deployed%20on-Cloudflare%20Pages-orange)](https://pages.cloudflare.com/)
 
 
+<img width="1118" height="1104" alt="image" src="https://github.com/user-attachments/assets/3019b7f2-00e1-43dc-a654-3f0847992366" />
+
+
 ## 🚀 Live Demo
 
 **[View Live Application →](https://266d91d4.tenanttrack.pages.dev/)**
